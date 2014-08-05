@@ -67,7 +67,7 @@
 		
 		//Create our plugin admin page under the 'Appearance' menu
 		# WPMobile comment: Removed since the plugin will add it in a different menu.
-		#add_action('admin_menu', array('DTS_Admin', 'admin_menu'));
+		add_action('admin_menu', array('DTS_Admin', 'admin_menu'));
 		
 		//Check if we need to save any form data that was submitted
 		add_action('load-appearance_page_device-themes', array('DTS_Admin', 'load'));
