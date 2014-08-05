@@ -1,5 +1,5 @@
 <?php
-class WPMobTheme {
+abstract class WPMobTheme {
 	/**
 	 * This method will be called during the plugin initialization. Here, register handlers and others
 	 * as needed.
@@ -10,7 +10,7 @@ class WPMobTheme {
 	/**
 	 * Initialize the theme settings panel. The plugin will add a menu entry to display this panel.
 	 */
-	static function init_panel() {
+	static function admin_panel() {
 	}
 	
 	static function invalid_theme_path(){?>
