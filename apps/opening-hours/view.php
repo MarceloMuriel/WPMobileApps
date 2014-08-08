@@ -1,7 +1,7 @@
 <div>
 	<div class="wpmob-opening-hours">
 	<?php 
-	echo get_option($appID . '_desc');
+	echo wpautop(get_option($appID . '_desc'));
 	?>
 	</div>
 	<script type="text/javascript">

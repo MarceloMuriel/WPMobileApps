@@ -1,7 +1,7 @@
 <div>
 	<div class="wpmob-find-us">
 		<div class="wpmob-find-us-address">
-			<?php echo get_option($appID . '_address'); ?>
+			<?php echo wpautop(get_option($appID . '_address')); ?>
 		</div>
 		<div id="wpmob-google-map"></div>
 		<script type="text/javascript">

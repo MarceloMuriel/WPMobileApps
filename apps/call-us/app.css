@@ -1,7 +1,13 @@
+.wpmob-call-us {
+	font-size: 1.5em;
+}
+.wpmob-call-us * {
+	font-size: 1.0em;
+}
 .wpmob-call-us-phone {
 	max-width: 250px;
 	margin: 20% auto;
-	font-size: 2em;
+	font-size: 1.2em;
 	text-align: center;
 	height: auto;
 }

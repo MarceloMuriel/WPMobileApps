@@ -257,9 +257,9 @@ class WPMobOptions {
                 <?php
                 $content = ($content = get_option($value['id']))? stripslashes($content):$value['default'];
                 if($value['rich_editor'] == 'true'){
-                	$settings = array( 'media_buttons' => false,'quicktags' => false );
+                	$settings = array( 'media_buttons' => false,'quicktags' => true, 'wpautop' => true );
 					$editor_id = $value['id'];
-					wp_editor($content, $editor_id, $settings);
+					wp_editor(wpautop($content), $editor_id, $settings);
                 }else{?>
                 	<textarea<?php if ($value['placeholder']) echo ' placeholder="' . $value['placeholder'] . '"'; ?> id="<?php echo $value['id']; ?>" name="<?php echo $value['id']; ?>" cols="70" rows="5"><?php echo $content;?></textarea>
                 <?php

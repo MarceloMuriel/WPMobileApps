@@ -11,8 +11,8 @@ if (!empty($_POST['contact_email']) && !empty($_POST['contact_subject']) && !emp
 		if (filter_var($_POST['contact_email'], FILTER_VALIDATE_EMAIL) !== FALSE) {
 			$name = $_POST['contact_name'];
 			$email = $_POST['contact_email'];
-			$subject = get_option('wpmob_app_contact_us_subject') . ' ' . $_POST['contact_subject'];
-			$msg = get_option('wpmob_app_contact_us_body') . $_POST['contact_message'];
+			$subject = get_option('wpmob_app_contact_us_subject') . " [$name] ". $_POST['contact_subject'];
+			$msg = wpautop(get_option('wpmob_app_contact_us_body')) . $_POST['contact_message'];
 
 			$fromName = get_bloginfo();
 
@@ -21,7 +21,7 @@ if (!empty($_POST['contact_email']) && !empty($_POST['contact_subject']) && !emp
 			$headers[] = "Reply-To: {$email}";
 			add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
 			if (wp_mail($to, $subject, $msg, $headers)) {
-				$output[] = array('type' => 'success', 'msg' => stripslashes(get_option('wpmob_app_contact_us_conf')));
+				$output[] = array('type' => 'success', 'msg' => wpautop(stripslashes(get_option('wpmob_app_contact_us_conf'))));
 			} else {
 				$output[] = array('type' => 'error', 'msg' => __('Sorry, the e-mail could not been sent!', 'wpmobile'));
 			}

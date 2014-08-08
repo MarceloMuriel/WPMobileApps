@@ -1,4 +1,4 @@
-<div>
+<div class="wpmob-call-us">
 	<div class="wpmob-call-us-phone">
 	<?php 
 	echo get_option($appID . '_phone');

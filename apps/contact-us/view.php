@@ -1,7 +1,6 @@
 <div>
 	<div class="wpmob-contact-us">
 		<div class="wpmob-contact-us-answer">
-			<span></span>
 		</div>
 		<form action="<?php echo WPMOB_URL . '/apps/contact-us/send-email.php' ?>" method="post" enctype="multipart/form-data">
 			<?php 

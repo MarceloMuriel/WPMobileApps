@@ -4,7 +4,7 @@
  */
 function wpmobContactUsRefresh() {
 	jQuery('.wpmob-contact-us form').show().get(0).reset();
-	jQuery('.wpmob-contact-us-answer > span').empty().parent().hide();
+	jQuery('.wpmob-contact-us-answer').empty().hide();
 }
 
 
@@ -21,14 +21,14 @@ jQuery('.wpmob-contact-us form').submit(function(e) {
 				// Normally a single object is returned
 				out = data[0];
 				if (out.type == 'success') {
-					jQuery('.wpmob-contact-us-answer > span').html(out.msg).removeClass('error').parent().show();
+					jQuery('.wpmob-contact-us-answer').html(out.msg).removeClass('error').show();
 					jQuery('.wpmob-contact-us form').hide();
 				} else {
-					jQuery('.wpmob-contact-us-answer > span').html(out.msg).addClass('error').parent().show();
+					jQuery('.wpmob-contact-us-answer').html(out.msg).addClass('error').show();
 				}
 			} else {
 				// Unknown error
-				jQuery('.wpmob-contact-us-answer > span').html(data).addClass('error').parent().show();
+				jQuery('.wpmob-contact-us-answer').html(data).addClass('error').show();
 			}
 		}
 	});
