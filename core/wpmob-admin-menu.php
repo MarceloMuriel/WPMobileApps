@@ -8,14 +8,6 @@ function wpmob_admin_build_menu() {
 	# Add submenu for the theme settings
 	add_submenu_page('wpmobile', 'Theme Settings', 'Theme Settings', 'manage_options', 'wpmobile-theme', array($GLOBALS['WPMOB_THEME_CLASS'], 'admin_panel'));
 	# Add submenu for the apps
-	add_submenu_page('wpmobile', 'Apps Menu', 'Apps', 'manage_options', 'wpmobile-apps', 'wpmob_admin_apps_menu');
-}
-
-function wpmob_admin_apps_menu() {
-	if (!current_user_can('manage_options')) {
-		wp_die(__('You do not have sufficient permissions to access this page.'));
-	}
-
-	echo '<h1>Apps</h1>';
+	add_submenu_page('wpmobile', 'Apps Menu', 'Apps', 'manage_options', 'wpmobile-apps', array('WPMobApp', 'admin_panel'));
 }
 ?>

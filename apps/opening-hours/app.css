@@ -1,0 +1,12 @@
+.wpmob-opening-hours {
+	max-width: 650px;
+	margin: 20% auto;
+	font-size: 2em;
+	text-align: center;
+	height: auto;
+	padding: 3%;
+	border: 1px solid rgba(46,129,176, 0.9);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}

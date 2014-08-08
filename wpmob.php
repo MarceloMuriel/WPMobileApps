@@ -11,6 +11,8 @@
  License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  Trademark:
  */
+ 
+ini_set('display_errors', 1);
 
 define('WPMOB_VERSION', '1.0.0');
 define('WPMOB_DIR', dirname(__FILE__));

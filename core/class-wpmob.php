@@ -1,7 +1,9 @@
 <?php
 
 # Load the WPMobile class
-require_once (WPMOB_DIR . '/core/admin-menu.php');
+require_once (WPMOB_DIR . '/core/wpmob-admin-menu.php');
+# Load the App handler class
+require_once (WPMOB_DIR . '/core/class-wpmob-app.php');
 
 class WPMobile {
 
@@ -9,6 +11,9 @@ class WPMobile {
 
 	}
 
+	/**
+	 * Initialize the theme and apps.
+	 */
 	function initialize() {
 		# Register the menu items in the admin panel.
 		add_action('admin_menu', 'wpmob_admin_build_menu');
@@ -26,6 +31,10 @@ class WPMobile {
 				echo "No base class for WPMobTheme found at " . WPMOB_THEME_BASE_CLASS_PATH;
 			}
 		}
+
+		# Initialize the App handler
+		$app = new WPMobApp();
+		$app -> initialize();
 	}
 
 }
