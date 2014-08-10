@@ -26,7 +26,7 @@ class WPMobAppContactUs {
 		return $options;
 	}
 
-	static function getSettings() {
+	static function getDefaultSettings() {
 		$appSettings = array();
 		$appSettings["wpmob_app_contact_us"] = array();
 		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_base_dir"] = 'contact-us';
@@ -36,8 +36,12 @@ class WPMobAppContactUs {
 		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_form_subject"] = array("label" => "", "placeholder" => "Subject", "default" => "", "required" => TRUE);
 		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_form_message"] = array("label" => "", "placeholder" => "Message", "default" => "", "required" => TRUE);
 		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_form_submit"] = array("label" => "Send Message", "placeholder" => "", "default" => "", "required" => FALSE);
-		if (!get_option('wpmob_app_contact_us_order'))
-			$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_order"] = 4;
+		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_order"] = 4;
+		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_label"] = 'Contact us';
+		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_text_icon"] = 'fa fa-envelope';
+		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_address"] = get_option('admin_email');
+		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_subject"] = '[Contact form]';
+		$appSettings["wpmob_app_contact_us"]["wpmob_app_contact_us_conf"] = 'Thank you!';
 
 		return $appSettings;
 	}

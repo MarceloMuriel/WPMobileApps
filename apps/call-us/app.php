@@ -23,13 +23,14 @@ class WPMobAppCallUs {
 		return $options;
 	}
 
-	static function getSettings() {
+	static function getDefaultSettings() {
 		$appSettings = array();
 		$appSettings["wpmob_app_call_us"] = array();
 		$appSettings["wpmob_app_call_us"]["wpmob_app_call_us_base_dir"] = 'call-us';
 		$appSettings["wpmob_app_call_us"]["wpmob_app_call_us_slug"] = '#call-us';
-		if (!get_option('wpmob_app_call_us_order'))
-			$appSettings["wpmob_app_call_us"]["wpmob_app_call_us_order"] = 1;
+		$appSettings["wpmob_app_call_us"]["wpmob_app_call_us_order"] = 1;
+		$appSettings["wpmob_app_call_us"]["wpmob_app_call_us_label"] = 'Call us';
+		$appSettings["wpmob_app_call_us"]["wpmob_app_call_us_text_icon"] = 'fa fa-phone';
 
 		return $appSettings;
 	}

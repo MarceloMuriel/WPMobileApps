@@ -23,13 +23,15 @@ class WPMobAppOpeningHours {
 		return $options;
 	}
 
-	static function getSettings() {
+	static function getDefaultSettings() {
 		$appSettings = array();
 		$appSettings["wpmob_app_opening_hours"] = array();
 		$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_base_dir"] = 'opening-hours';
 		$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_slug"] = '#opening-hours';
-		if (!get_option('wpmob_app_opening_hours_order'))
-			$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_order"] = 2;
+		$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_order"] = 2;
+		$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_label"] = 'Opening hours';
+		$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_text_icon"] = 'fa fa-clock-o';
+		$appSettings["wpmob_app_opening_hours"]["wpmob_app_opening_hours_desc"] = 'Opening hours...';
 
 		return $appSettings;
 	}

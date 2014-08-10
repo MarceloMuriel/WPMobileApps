@@ -34,13 +34,15 @@ class WPMobAppFindUs {
 		return $options;
 	}
 
-	static function getSettings() {
+	static function getDefaultSettings() {
 		$appSettings = array();
 		$appSettings["wpmob_app_find_us"] = array();
 		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_base_dir"] = 'find-us';
 		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_slug"] = '#find-us';
-		if (!get_option('wpmob_app_find_us_order'))
-			$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_order"] = 3;
+		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_order"] = 3;
+		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_label"] = 'Find us';
+		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_text_icon"] = 'fa fa-map-marker';
+		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_address"] = 'Address not available...';
 
 		return $appSettings;
 	}

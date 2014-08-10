@@ -26,7 +26,7 @@ class WPMobApp {
 			add_action('wp_enqueue_scripts', array($this, 'register_frontend_scripts'), 100);
 		}
 		add_action('admin_head', array($this, 'register_admin_scripts'));
-		# TODO: Check if there are new apps and load their settings.
+		# TODO: Check if there are new apps and load their default settings.
 	}
 
 	/**
@@ -117,31 +117,28 @@ class WPMobApp {
 		return $options;
 	}
 
-	function getAppSettings() {
+	function getDefaultAppSettings() {
 		$settings = array();
 		foreach ($this->appClasses as $appClass) {
-			$settings = array_merge($settings, $appClass::getSettings());
+			$settings = array_merge($settings, $appClass::getDefaultSettings());
 		}
 
 		return $settings;
 	}
 
 	function on_activation() {
-		# Register the settings for each app
-		foreach ($this->getAppSettings() as $appID => $settings) {
+		# Register the default settings for each app only the first time.
+		foreach ($this->getDefaultAppSettings() as $appID => $settings) {
 			foreach ($settings as $settingID => $setting) {
-				update_option($settingID, $setting);
+				# If the setting does not exist, set it.
+				if(!get_option($settingID))
+					update_option($settingID, $setting);
 			}
 		}
 	}
 
 	function on_deactivation() {
-		# Remove the settings from the DB
-		foreach ($this->getAppSettings() as $appID => $settings) {
-			foreach ($settings as $settingID => $setting) {
-				delete_option($settingID);
-			}
-		}
+		# Temporarily deactivate the apps
 	}
 
 }
