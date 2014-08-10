@@ -12,7 +12,8 @@
  Trademark:
  */
  
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
 define('WPMOB_VERSION', '1.0.0');
 define('WPMOB_DIR', dirname(__FILE__));
@@ -40,6 +41,13 @@ register_theme_directory(WPMOB_DIR . '/themes');
 # Load the WPMobile class
 require_once (WPMOB_DIR . '/core/class-wpmob.php');
 $wpmob = new WPMobile();
-# Initialize the plugin
+
+# Activation hook for plugin initialization
+register_activation_hook( __FILE__,  array($wpmob, 'on_activation'));
+register_deactivation_hook( __FILE__, array($wpmob, 'on_deactivation'));
+register_uninstall_hook( __FILE__, array($wpmob, 'on_uninstall'));
+# Setup filters or plugin overrides.
+add_action('plugins_loaded', array($wpmob, 'plugins_loaded'));
+# Initialize immediately the plugin
 $wpmob -> initialize();
 ?>

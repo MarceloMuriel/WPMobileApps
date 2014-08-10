@@ -2,8 +2,14 @@
 require_once (WPMOB_DIR . '/core/util/device-detection.php');
 
 class WPMobApp {
-	function __construct() {
+	var $appClasses = array();
 
+	function __construct() {
+		# Load the App Classes
+		$apps = $this -> getAppClassPaths(WPMOB_DIR . '/apps');
+		foreach ($apps as $app)
+			include_once ($app);
+		$this -> appClasses = array_slice(get_declared_classes(), -1 * count($apps));
 	}
 
 	/**
@@ -17,6 +23,32 @@ class WPMobApp {
 			add_action('wp_enqueue_scripts', array($this, 'register_frontend_scripts'), 100);
 		}
 		add_action('admin_head', array($this, 'register_admin_scripts'));
+		# Register / Update app settings
+		foreach ($this->getAppSettings() as $settings) {
+			foreach ($settings as $settingID => $setting) {
+				update_option($settingID, $setting);
+			}
+		}
+	}
+
+	/**
+	 * It scans and returns the app class file paths.
+	 */
+	private function getAppClassPaths($path) {
+		$classes = array();
+		# scan the apps dir for apps inside
+		foreach (new DirectoryIterator($path) as $f) {
+			if ($f -> isDot())
+				continue;
+			if ($f -> isDir()) {
+				$app_class = $path . '/' . $f . '/app.php';
+				if (is_file($app_class)) {
+					$classes[] = $app_class;
+				}
+			}
+		}
+
+		return $classes;
 	}
 
 	function register_frontend_scripts() {
@@ -51,6 +83,7 @@ class WPMobApp {
 	function register_admin_scripts() {
 		# Do not load on the frontend.
 		if (is_admin()) {
+			require_once (WPMOB_DIR . '/core/class-wpmob-app-panel.php');
 			echo '<link rel="stylesheet" href="' . WPMOB_URL . '/core/css/app-panel-admin.css" />';
 			echo '<script type="text/javascript" src="' . WPMOB_URL . '/core/js/app-panel-admin.js"></script>';
 		}
@@ -61,21 +94,63 @@ class WPMobApp {
 	 * administration. This method is called with the add_action()
 	 * hook in the admin-menu.php file.
 	 */
-	static function admin_panel() {
-		# Include the necessary files
-		require_once (WPMOB_DIR . '/core/wpmob-app-admin-options.php');
-		require_once (WPMOB_DIR . '/core/class-wpmob-app-admin-options.php');
-		# Register app IDs, merge with existing IDs.
-		update_option('wpmob_app_ids', array_unique(array_merge(is_array(($IDs = get_option('wpmob_app_ids'))) ? $IDs : array(), array_keys($appSettings))));
+	function admin_panel() {
+		# Load the panel
+		$panel = new WPMobAppPanel($this -> getAdminOptions());
+		echo $panel -> wpmob_display_page();
+	}
+
+	/**
+	 * This section builds the menu of the app admin panel.
+	 */
+	function getAdminOptions() {
+		$options = array();
+		$options[] = array("type" => "section", "icon" => "dashicons-admin-generic", "title" => "General Settings", "id" => "wpmob_general", "expanded" => "true");
+		# General section
+		$options[] = array("section" => "wpmob_general", "type" => "heading", "title" => "General", "id" => "wpmob_general_visual");
+		$options[] = array("under_section" => "wpmob_general_visual", "type" => "checkbox", "name" => "Disable All Apps", "id" => array("wpmob_disable_apps"), "options" => array("Disable"), "desc" => "Checking this option will not show any apps in your theme.", "default" => array("not"));
+		# App main section
+		$options[] = array("type" => "section", "icon" => "dashicons-admin-tools", "title" => "App Settings", "id" => "wpmob_apps", "expanded" => "true");
+
+		foreach ($this->appClasses as $appClass) {
+			$options = array_merge($options, $appClass::getAdminOptions());
+		}
+
+		return $options;
+	}
+
+	function getAppSettings() {
+		$settings = array();
+		foreach ($this->appClasses as $appClass) {
+			$settings = array_merge($settings, $appClass::getSettings());
+		}
+
+		return $settings;
+	}
+
+	function on_activation() {
 		# Register the settings for each app
-		foreach ($appSettings as $appID => $settings) {
+		foreach ($this->getAppSettings() as $appID => $settings) {
 			foreach ($settings as $settingID => $setting) {
 				update_option($settingID, $setting);
 			}
 		}
-		# Load the panel
-		$panel = new WPMobOptions($options);
-		$panel -> wpmob_display_page();
+	}
+
+	function on_deactivation() {
+		# Remove the settings from the DB
+		foreach ($this->getAppSettings() as $appID => $settings) {
+			foreach ($settings as $settingID => $setting) {
+				delete_option($settingID);
+			}
+		}
+	}
+
+	function on_uninstall() {
+		# Delete all the options from the database besides the settings.
+		foreach ($this->getAdminOptions() as $option) {
+			delete_option($option['id']);
+		}
 	}
 
 }

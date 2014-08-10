@@ -1,12 +1,18 @@
 <?php
-$appIDs = get_option('wpmob_app_ids');
+# Instantiate the app classes
+$apps = array();
+foreach ($this->appClasses as $appClass) {
+	$app = new $appClass();
+	$apps[($pos = get_option($app -> appID . '_order'))? $pos : count($app)] = $app;
+}
+ksort($apps);
 ?>
 <div id="bottomtoolbar" style="display: none;">
 	<div id="pinasmenubox" class="pinasmenubox">
 		<div class="toolbar-carousel">
-			<?php foreach($appIDs as $appID): ?>
+			<?php foreach($apps as $app):?>
 			<div class="item wpmob-app-icon">
-				<a class="wpmob-icon" rel="<?php echo $appID; ?>" href="<?php echo get_option($appID . '_slug'); ?>"> <i class="<?php echo get_option($appID . '_text_icon'); ?>"></i><span class="icontext"><?php echo get_option($appID . '_label'); ?></span> </a>
+				<a class="wpmob-icon" rel="<?php echo $app -> appID; ?>" href="<?php echo get_option($app -> appID . '_slug'); ?>"> <i class="<?php echo get_option($app -> appID . '_text_icon'); ?>"></i><span class="icontext"><?php echo get_option($app -> appID . '_label'); ?></span> </a>
 			</div>
 			<?php endforeach; ?>
 		</div>
@@ -14,14 +20,10 @@ $appIDs = get_option('wpmob_app_ids');
 </div>
 <div id="wpmob-apps-content" style="display: none;">
 	<?php
-	foreach ($appIDs as $appID) {
-		$appDir = WPMOB_DIR . '/apps/' . get_option($appID .  '_base_dir');
-		$mainClass = $appDir . '/' . get_option($appID . '_main_class');
-		if (is_file($mainClass)) {
-			echo "<div id='{$appID}' class='wpmob-app-content'>";
-			include_once ($mainClass);
-			echo "</div>";
-		}
+	foreach ($apps as $app) {
+		echo "<div id='{$app -> appID}' class='wpmob-app-content'>";
+		$app -> render();
+		echo "</div>";
 	}
 	?>
 </div>

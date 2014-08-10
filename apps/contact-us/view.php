@@ -4,11 +4,11 @@
 		</div>
 		<form action="<?php echo WPMOB_URL . '/apps/contact-us/send-email.php' ?>" method="post" enctype="multipart/form-data">
 			<?php 
-			$form_name = get_option($appID . '_form_name');
-			$form_email = get_option($appID . '_form_email'); 
-			$form_subject = get_option($appID . '_form_subject');
-			$form_msg = get_option($appID . '_form_message');
-			$form_submit = get_option($appID . '_form_submit');
+			$form_name = get_option($this -> appID . '_form_name');
+			$form_email = get_option($this -> appID . '_form_email'); 
+			$form_subject = get_option($this -> appID . '_form_subject');
+			$form_msg = get_option($this -> appID . '_form_message');
+			$form_submit = get_option($this -> appID . '_form_submit');
 			?>
 			<input type="text" id="contact_name" name="contact_name" <?php echo $form_name['required']?'required':'';?> placeholder="<?php echo ($form_name['required']?'* ':'').$form_name['placeholder'] ?>" value="<?php echo $form_name['default'] ?>"/><br/>
 			<input type="email" id="contact_email" name="contact_email" <?php echo $form_email['required']?'required':'';?> placeholder="<?php echo ($form_email['required']?'* ':'').$form_email['placeholder'] ?>" value="<?php echo $form_email['default'] ?>"/><br/>
@@ -21,7 +21,7 @@
 			 * Register the content refresh function to be called every 
 			 * time the content is displayed.
 			 */ 
-			window['<?php echo $appID ?>_refresh'] = function(){
+			window['<?php echo $this -> appID ?>_refresh'] = function(){
 				wpmobContactUsRefresh();
 			}
 		</script>		

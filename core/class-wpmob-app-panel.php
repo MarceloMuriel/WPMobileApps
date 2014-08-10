@@ -1,5 +1,5 @@
 <?php
-class WPMobOptions {
+class WPMobAppPanel {
 	private $options;
 
 	public function __construct($options) {
@@ -10,7 +10,8 @@ class WPMobOptions {
 	 * Method to generate the settings form.
 	 */
 	public function wpmob_display_page() {?>
-        <?php $this->save_options(); ?>
+        <?php $this->save_options(); 
+        ob_start();?>
         <form id="wpmob-settings" method="post">
             <input type="hidden" name="action" id="action" value="wpmob_save_options" />
             <div id="wpmob-sidebar">
@@ -129,6 +130,7 @@ class WPMobOptions {
             </div> 
         </form>
         <?php
+        return ob_get_clean();
     }
 	
 	/* Normal text input ("type" => "text" */
