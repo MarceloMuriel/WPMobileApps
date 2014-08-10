@@ -9,7 +9,10 @@ class WPMobApp {
 		$apps = $this -> getAppClassPaths(WPMOB_DIR . '/apps');
 		foreach ($apps as $app)
 			include_once ($app);
-		$this -> appClasses = array_slice(get_declared_classes(), -1 * count($apps));
+		foreach (get_declared_classes() as $class) {
+			if ($class != 'WPMobApp' && strpos($class, 'WPMobApp') === 0)
+				$this -> appClasses[] = $class;
+		}
 	}
 
 	/**
@@ -23,12 +26,7 @@ class WPMobApp {
 			add_action('wp_enqueue_scripts', array($this, 'register_frontend_scripts'), 100);
 		}
 		add_action('admin_head', array($this, 'register_admin_scripts'));
-		# Register / Update app settings
-		foreach ($this->getAppSettings() as $settings) {
-			foreach ($settings as $settingID => $setting) {
-				update_option($settingID, $setting);
-			}
-		}
+		# TODO: Check if there are new apps and load their settings.
 	}
 
 	/**
@@ -143,13 +141,6 @@ class WPMobApp {
 			foreach ($settings as $settingID => $setting) {
 				delete_option($settingID);
 			}
-		}
-	}
-
-	function on_uninstall() {
-		# Delete all the options from the database besides the settings.
-		foreach ($this->getAdminOptions() as $option) {
-			delete_option($option['id']);
 		}
 	}
 
