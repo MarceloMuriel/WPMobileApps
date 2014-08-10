@@ -45,7 +45,7 @@ $wpmob = new WPMobile();
 # Activation hook for plugin initialization
 register_activation_hook( __FILE__,  array($wpmob, 'on_activation'));
 register_deactivation_hook( __FILE__, array($wpmob, 'on_deactivation'));
-register_uninstall_hook( __FILE__, array($wpmob, 'on_uninstall'));
+register_uninstall_hook( __FILE__, array('WPMobile', 'on_uninstall'));
 # Setup filters or plugin overrides.
 add_action('plugins_loaded', array($wpmob, 'plugins_loaded'));
 # Initialize immediately the plugin

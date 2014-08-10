@@ -53,8 +53,7 @@ class WPMobile {
 		# Check if the current request carries a valid nonce
 		check_admin_referer("activate-plugin_{$plugin}");
 
-		$app = new WPMobApp();
-		$app -> on_activation();
+		$this -> appHandler -> on_activation();
 	}
 
 	function on_deactivation() {
@@ -64,24 +63,19 @@ class WPMobile {
 		# Check if the current request carries a valid nonce
 		check_admin_referer("deactivate-plugin_{$plugin}");
 
-		$app = new WPMobApp();
-		$app -> on_deactivation();
+		$this -> appHandler -> on_deactivation();
 	}
 
-	function on_uninstall() {
+	static function on_uninstall() {
 		# Delete all options from the database
 		if (!current_user_can('activate_plugins'))
 			return;
 		# Check if the current request carries a valid nonce
 		check_admin_referer('bulk-plugins');
-		(var_dump($_GET));
-		# Check if the file is the one that was registered during the uninstall hook.
-		if (__FILE__ != WP_UNINSTALL_PLUGIN)
-			return;
-		exit('proceedint to uninstall..');
-
-		$app = new WPMobApp();
-		$app -> on_uninstall();
+		
+		# Delete all options and settings from the database
+		global $wpdb;
+		$wpdb->query("DELETE FROM wp_options WHERE option_name LIKE 'wpmob_%'");
 	}
 
 	function plugins_loaded() {
