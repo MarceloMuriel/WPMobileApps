@@ -52,6 +52,8 @@ register_deactivation_hook( __FILE__, array($wpmob, 'on_deactivation'));
 register_uninstall_hook( __FILE__, array('WPMobile', 'on_uninstall'));
 # Setup filters or plugin overrides.
 add_action('plugins_loaded', array($wpmob, 'plugins_loaded'));
+# Add custom action buttons in the plugin list
+add_filter('plugin_action_links', array($wpmob, 'addCustomActionLinks'), 10, 2);
 # Initialize immediately the plugin
 $wpmob -> initialize();
 ?>

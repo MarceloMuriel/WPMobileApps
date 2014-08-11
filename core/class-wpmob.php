@@ -46,6 +46,16 @@ class WPMobile {
 		add_submenu_page('wpmobile', 'Apps Menu', 'Apps', 'manage_options', 'wpmobile-apps', array($this -> appHandler, 'admin_panel'));
 	}
 
+	function addCustomActionLinks($links, $file) {
+		if ($file == 'WPMobileApps/wpmob.php') :
+			//Insert the link at the end
+			unset($links['edit']);
+			$links['settings'] = sprintf('<a href="%s" class="edit"> %s </a>', admin_url('admin.php?page=wpmobile-apps'), __('Settings', 'wpmob'));
+		endif;
+
+		return $links;
+	}
+
 	function getDefaultSettings() {
 		# Default theme registration for the device-theme-switch plugin
 		$settings = array();
