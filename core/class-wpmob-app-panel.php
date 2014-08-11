@@ -36,7 +36,7 @@ class WPMobAppPanel {
 					                            echo ' class="defaulttab"';
 					                            $first = false;
 					                        }
-                                            ?> href="#" rel="<?php echo $sections['id']; ?>"><p><?php echo $sections['title']; ?></p></a></li>
+                                            ?> href="#<?php echo $sections['id']; ?>" rel="<?php echo $sections['id']; ?>"><p><?php echo $sections['title']; ?></p></a></li>
                                             <?php
                                             endif;
                                     endforeach;

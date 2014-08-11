@@ -11,17 +11,16 @@ function switch_tabs(obj) {
 
 jQuery(document).ready(function() {
 	setWPMobTabs();
-}); 
+});
 
-function setWPMobTabs(){
+function setWPMobTabs() {
 	// Tabs
 	jQuery('#wpmob-main-menu ul a').click(function() {
 		switch_tabs(jQuery(this));
 	});
 	jQuery('.tab-content').hide();
-
-	var id = jQuery('.defaulttab').attr('rel');
-	jQuery('#' + id).show();
+	// Load the default or current tab.
+	jQuery(((window.location.hash) ? window.location.hash : '#' + jQuery('.defaulttab').attr('rel'))).show();
 
 	jQuery('.default-accordion').show();
 }
