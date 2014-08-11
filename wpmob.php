@@ -2,16 +2,16 @@
 /*
  Plugin Name: WPMobile Apps
  Plugin URI: http://www.wp-tmobile.com
- Version: 1.0
+ Version: 1.0 - Beta
  Description: Create a mobile WordPress website experience on your website.
  Author: SysCrunch
  Author URI: http://www.syscrunch.com/
  Text Domain: wpmob
- Domain Path: /lang
+ Domain Path: /langs
  License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  Trademark:
  */
- 
+
 ini_set('display_errors', 0);
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
@@ -47,10 +47,10 @@ require_once (WPMOB_DIR . '/core/class-wpmob.php');
 $wpmob = new WPMobile();
 
 # Activation hook for plugin initialization
-register_activation_hook( __FILE__,  array($wpmob, 'on_activation'));
-register_deactivation_hook( __FILE__, array($wpmob, 'on_deactivation'));
-register_uninstall_hook( __FILE__, array('WPMobile', 'on_uninstall'));
-# Setup filters or plugin overrides.
+register_activation_hook(__FILE__, array($wpmob, 'on_activation'));
+register_deactivation_hook(__FILE__, array($wpmob, 'on_deactivation'));
+register_uninstall_hook(__FILE__, array('WPMobile', 'on_uninstall'));
+# Setup filters, plugin overrides, load domain text.
 add_action('plugins_loaded', array($wpmob, 'plugins_loaded'));
 # Add custom action buttons in the plugin list
 add_filter('plugin_action_links', array($wpmob, 'addCustomActionLinks'), 10, 2);
