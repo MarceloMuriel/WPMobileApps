@@ -52,7 +52,7 @@ class WPMobile {
 		$settings['dts'] = array();
 		$settings['dts']['dts_handheld_theme'] = 'name=' . WPMOB_DEFAULT_THEME_NAME . '&template=' . WPMOB_DEFAULT_THEME_TEMPLATE . '&stylesheet=' . WPMOB_DEFAULT_THEME_CSS;
 		$settings['dts']['dts_tablet_theme'] = 'name=' . WPMOB_DEFAULT_THEME_NAME . '&template=' . WPMOB_DEFAULT_THEME_TEMPLATE . '&stylesheet=' . WPMOB_DEFAULT_THEME_CSS;
-		
+
 		return $settings;
 	}
 
@@ -62,12 +62,12 @@ class WPMobile {
 		$plugin = isset($_REQUEST['plugin']) ? $_REQUEST['plugin'] : '';
 		# Check if the current request carries a valid nonce
 		check_admin_referer("activate-plugin_{$plugin}");
-		
+
 		# Register the default settings only the first time.
 		foreach ($this->getDefaultSettings() as $settings) {
 			foreach ($settings as $settingID => $setting) {
 				# If the setting does not exist, set it.
-				if(!get_option($settingID))
+				if (!get_option($settingID))
 					update_option($settingID, $setting);
 			}
 		}
