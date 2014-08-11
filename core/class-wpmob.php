@@ -112,6 +112,11 @@ class WPMobile {
 	function plugins_loaded() {
 		# Load Text Domain
 		load_plugin_textdomain('wpmob', false, basename(WPMOB_DIR) . '/langs');
+		# Load Text Domain for each individual app
+		foreach ($this->appHandler->appClasses as $appClass) {
+			if(method_exists($appClass, 'loadDomainText'))
+				$appClass::loadDomainText();
+		}
 	}
 
 }

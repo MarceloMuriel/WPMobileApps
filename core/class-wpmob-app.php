@@ -103,12 +103,12 @@ class WPMobApp {
 	 */
 	function getAdminOptions() {
 		$options = array();
-		$options[] = array("type" => "section", "icon" => "dashicons-admin-generic", "title" => "General Settings", "id" => "wpmob_general", "expanded" => "true");
+		$options[] = array("type" => "section", "icon" => "dashicons-admin-generic", "title" => __("General Settings", "wpmob"), "id" => "wpmob_general", "expanded" => "true");
 		# General section
-		$options[] = array("section" => "wpmob_general", "type" => "heading", "title" => "General", "id" => "wpmob_general_visual");
-		$options[] = array("under_section" => "wpmob_general_visual", "type" => "checkbox", "name" => "Disable All Apps", "id" => array("wpmob_disable_apps"), "options" => array("Disable"), "desc" => "Checking this option will not show any apps in your theme.", "default" => array("not"));
+		$options[] = array("section" => "wpmob_general", "type" => "heading", "title" => __("General", "wpmob"), "id" => "wpmob_general_visual");
+		$options[] = array("under_section" => "wpmob_general_visual", "type" => "checkbox", "name" => __("Disable All Apps", "wpmob"), "id" => array("wpmob_disable_apps"), "options" => array(__("Disable", "wpmob")), "desc" => __("Checking this option will not show any apps in your theme.", "wpmob"), "default" => array("not"));
 		# App main section
-		$options[] = array("type" => "section", "icon" => "dashicons-admin-tools", "title" => "App Settings", "id" => "wpmob_apps", "expanded" => "true");
+		$options[] = array("type" => "section", "icon" => "dashicons-admin-tools", "title" => __("App Settings", "wpmob"), "id" => "wpmob_apps", "expanded" => "true");
 
 		foreach ($this->appClasses as $appClass) {
 			$options = array_merge($options, $appClass::getAdminOptions());
@@ -132,7 +132,7 @@ class WPMobApp {
 		foreach ($this->getDefaultAppSettings() as $appID => $settings) {
 			foreach ($settings as $settingID => $setting) {
 				# If the setting does not exist, set it.
-				if(!get_option($settingID))
+				if (!get_option($settingID))
 					update_option($settingID, $setting);
 			}
 		}

@@ -21,31 +21,37 @@ class WPMobAppFindUs {
 
 	static function getAdminOptions() {
 		$options = array();
-		$options[] = array("section" => "wpmob_apps", "type" => "heading", "title" => "Find us", "id" => "wpmob_find_us");
-		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => "Order", "placeholder" => "", "id" => "wpmob_app_find_us_order", "desc" => "Order", "default" => 3);
-		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => "Label", "placeholder" => "", "id" => "wpmob_app_find_us_label", "desc" => "Label to display.", "default" => 'Find us');
-		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => "Text Icon", "placeholder" => "", "id" => "wpmob_app_find_us_text_icon", "desc" => "Icon to display, more <a href='http://fortawesome.github.io/Font-Awesome/icons/' target='_blank'>here</a>", "default" => 'fa fa-map-marker');
-		$options[] = array("type" => "textarea", "under_section" => "wpmob_find_us", "id" => "wpmob_app_find_us_address", "name" => "<strong>Formatted address</strong>", "desc" => "Enter your address in the format you wish.", "placeholder" => "647 Broadway New York, NY 10012", "img_desc" => "", "display_checkbox_id" => "", "default" => "", "rich_editor" => "true");
-		$options[] = array("under_section" => "wpmob_find_us", "type" => "small_heading", "title" => "Google Maps API", );
-		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => "Latitude", "placeholder" => "", "id" => "wpmob_app_find_us_lat", "desc" => "Latitude as retrieved in google maps.", "default" => '');
-		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => "Longitude", "placeholder" => "", "id" => "wpmob_app_find_us_long", "desc" => "Longitude as retrieve in google maps..", "default" => '');
-		#$this->options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => "Google Maps Api Key", "placeholder" => "", "id" => "wpmob_app_find_us_api_key", "desc" => "Enter your Google Maps key, you can get one <a href='' target='_blank'>here</a>", "default" => '');
+		$options[] = array("section" => "wpmob_apps", "type" => "heading", "title" => __("Find us", "wpmob-find-us"), "id" => "wpmob_find_us");
+		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => __("Order", "wpmob-find-us"), "placeholder" => "", "id" => "wpmob_app_find_us_order", "desc" => __("Order", "wpmob-find-us"), "default" => 3);
+		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => __("Label", "wpmob-find-us"), "placeholder" => "", "id" => "wpmob_app_find_us_label", "desc" => __("Label to display.", "wpmob-find-us"), "default" => __('Find us', 'wpmob-find-us'));
+		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => __("Text Icon", "wpmob-find-us"), "placeholder" => "", "id" => "wpmob_app_find_us_text_icon", "desc" => __("Icon to display, more <a href='http://fortawesome.github.io/Font-Awesome/icons/' target='_blank'>here</a>", "wpmob-find-us"), "default" => 'fa fa-map-marker');
+		$options[] = array("type" => "textarea", "under_section" => "wpmob_find_us", "id" => "wpmob_app_find_us_address", "name" => __("<strong>Formatted address</strong>", "wpmob-find-us"), "desc" => __("Enter your address in the format you wish.", "wpmob-find-us"), "placeholder" => __("647 Broadway New York, NY 10012", "wpmob-find-us"), "img_desc" => "", "display_checkbox_id" => "", "default" => "", "rich_editor" => "true");
+		$options[] = array("under_section" => "wpmob_find_us", "type" => "small_heading", "title" => __("Google Maps API", "wpmob-find-us"), );
+		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => __("Latitude", "wpmob-find-us"), "placeholder" => "", "id" => "wpmob_app_find_us_lat", "desc" => __("Latitude as retrieved in google maps.", "wpmob-find-us"), "default" => '');
+		$options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => __("Longitude", "wpmob-find-us"), "placeholder" => "", "id" => "wpmob_app_find_us_long", "desc" => __("Longitude as retrieve in google maps..", "wpmob-find-us"), "default" => '');
+		#$this->options[] = array("under_section" => "wpmob_find_us", "type" => "text", "name" => __("Google Maps Api Key", "wpmob-find-us"), "placeholder" => "", "id" => "wpmob_app_find_us_api_key", "desc" => __("Enter your Google Maps key, you can get one <a href='' target='_blank'>here</a>", "wpmob-find-us"), "default" => '');
 
 		return $options;
 	}
 
 	static function getDefaultSettings() {
+		WPMobAppFindUs::loadDomainText();
 		$appSettings = array();
 		$appSettings["wpmob_app_find_us"] = array();
 		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_base_dir"] = 'find-us';
 		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_slug"] = '#find-us';
 		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_order"] = 3;
-		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_label"] = 'Find us';
+		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_label"] = __('Find us', 'wpmob-find-us');
 		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_text_icon"] = 'fa fa-map-marker';
-		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_address"] = 'Address not available...';
+		$appSettings["wpmob_app_find_us"]["wpmob_app_find_us_address"] = __('Address not available...', 'wpmob-find-us');
 
 		return $appSettings;
 	}
 
+	static function loadDomainText(){
+		# Load Text Domain
+		load_plugin_textdomain('wpmob-find-us', false, basename(WPMOB_DIR) . '/apps/' . basename(dirname(__FILE__)) . '/langs');
+	}
+	
 }
 ?>

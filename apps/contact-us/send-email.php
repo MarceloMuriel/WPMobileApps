@@ -23,16 +23,16 @@ if (!empty($_POST['contact_email']) && !empty($_POST['contact_subject']) && !emp
 			if (wp_mail($to, $subject, $msg, $headers)) {
 				$output[] = array('type' => 'success', 'msg' => wpautop(stripslashes(get_option('wpmob_app_contact_us_conf'))));
 			} else {
-				$output[] = array('type' => 'error', 'msg' => __('Sorry, the e-mail could not been sent!', 'wpmobile'));
+				$output[] = array('type' => 'error', 'msg' => __('Sorry, the e-mail could not been sent!', 'wpmob-contact-us'));
 			}
 		} else {
-			$output[] = array('type' => 'error', 'msg' => __('Sorry, the e-mail address seems invalid!', 'wpmobile'));
+			$output[] = array('type' => 'error', 'msg' => __('Sorry, the e-mail address seems invalid!', 'wpmob-contact-us'));
 		}
 	} else {
-		$output[] = array('type' => 'success', 'msg' => __('There is no recipient configured in the App.', 'wpmobile'));
+		$output[] = array('type' => 'success', 'msg' => __('There is no recipient configured in the App.', 'wpmob-contact-us'));
 	}
 } else {
-	$output[] = array('type' => 'success', 'msg' => __('Sorry, there are missing parameters.', 'wpmobile'));
+	$output[] = array('type' => 'success', 'msg' => __('Sorry, there are missing parameters.', 'wpmob-contact-us'));
 }
 echo json_encode($output);
 ?>

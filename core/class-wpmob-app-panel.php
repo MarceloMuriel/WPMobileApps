@@ -60,7 +60,7 @@ class WPMobAppPanel {
                         <div class="tab-content" id="<?php echo $option['id']; ?>">
                             <div class="wpmob-settings-headline">
                                 <h2><?php echo $option['title']; ?></h2>
-                                <input name="save" class="save-button" type="submit" value="Save changes" />
+                                <input name="save" class="save-button" type="submit" value="<?php _e('Save changes', 'wpmob');?>" />
                             </div>
                             <?php
                             /* Cycle that goes though options, and calls function for displaying input types */

@@ -5,9 +5,9 @@
 	?>
 	<div>
 		<?php if(get_option($this -> appID . '_phone')): ?>
-		<a class="wpmob-call-now" href="tel:<?php echo get_option($this -> appID . '_phone');?>" target="_self"><?php _e('Call Now', 'wpmob')?></a>
+		<a class="wpmob-call-now" href="tel:<?php echo get_option($this -> appID . '_phone');?>" target="_self"><?php _e('Call Now', 'wpmob-call-us')?></a>
 		<?php else: ?>
-		<a class="wpmob-call-now" href="#" target="_self"><?php _e('No phone set yet', 'wpmob')?></a>
+		<a class="wpmob-call-now" href="#" target="_self"><?php _e('No phone set yet', 'wpmob-call-us')?></a>
 		<?php endif ?>
 	</div>
 	</div>

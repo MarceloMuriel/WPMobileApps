@@ -1,21 +1,50 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2014 SysCrunch
+# This file is distributed under the same license as the WPMobile Apps package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: wpmobile 1.0\n"
-"Report-Msgid-Bugs-To: noreply@wpmobile-apps.com\n"
-"POT-Creation-Date: 2014-08-11 11:16+0200\n"
-"PO-Revision-Date: 2014-08-11 11:22+0100\n"
-"Last-Translator: BellaModels <webmaster@bellamodels.ch>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Report-Msgid-Bugs-To: info@syscrunch.com\n"
+"POT-Creation-Date: 2014-08-11 15:46+0200\n"
+"PO-Revision-Date: 2014-08-11 15:39+0100\n"
+"Last-Translator: SysCrunch <info@syscrunch.com>\n"
+"Language-Team: SysCrunch <info@syscrunch.com>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.5\n"
+
+#. Below - script that generates divs for each tab
+#: core/class-wpmob-app-panel.php:63
+msgid "Save changes"
+msgstr "Enregistrer modifications"
+
+#: core/class-wpmob-app.php:106
+msgid "General Settings"
+msgstr "Options Générales"
+
+#. General section
+#: core/class-wpmob-app.php:108
+msgid "General"
+msgstr "Général"
+
+#: core/class-wpmob-app.php:109
+msgid "Disable All Apps"
+msgstr "Désactiver tous les Apps"
+
+#: core/class-wpmob-app.php:109
+msgid "Disable"
+msgstr "Désactiver"
+
+#: core/class-wpmob-app.php:109
+msgid "Checking this option will not show any apps in your theme."
+msgstr "En cochante cette case, les Apps ne s'afficheront pas sur votre site."
+
+#. App main section
+#: core/class-wpmob-app.php:111
+msgid "App Settings"
+msgstr "Options d'Apps"
 
 #. Main menu for the plugin settings.
 #: core/class-wpmob.php:40
@@ -26,28 +55,28 @@ msgstr "Options WPMobile Apps"
 msgid "WPMobile Apps"
 msgstr "WPMobile Apps"
 
-#. Add submenu page for the device-theme-switcher plugin settings.
+#. Add submenu for the apps
 #: core/class-wpmob.php:42
+msgid "Apps Menu"
+msgstr "Menu Apps"
+
+#: core/class-wpmob.php:42
+msgid "Apps"
+msgstr "Apps"
+
+#. Add submenu page for the device-theme-switcher plugin settings.
+#: core/class-wpmob.php:44
 msgid "Theme Redirection Settings"
 msgstr "Redirection du Thème"
 
-#: core/class-wpmob.php:42
+#: core/class-wpmob.php:44
 msgid "Theme Activation"
 msgstr "Choix du Thème"
 
 #. Add submenu for the theme settings
-#: core/class-wpmob.php:44
+#: core/class-wpmob.php:46
 msgid "Theme Settings"
 msgstr "Options du Thème"
-
-#. Add submenu for the apps
-#: core/class-wpmob.php:46
-msgid "Apps Menu"
-msgstr "Menu Apps"
-
-#: core/class-wpmob.php:46
-msgid "Apps"
-msgstr "Apps"
 
 #: core/class-wpmob.php:53
 msgid "Settings"
