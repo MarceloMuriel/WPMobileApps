@@ -41,6 +41,12 @@ include_once ('plugins/third-party/device-theme-switcher/dts_controller.php');
 
 # Register the embedded themes.
 register_theme_directory(WPMOB_DIR . '/themes');
+# Hide WPMobile themes from the themes.php page since they are not standalone themes.
+add_filter('wp_prepare_themes_for_js', 'hideWPMobileThemes');
+function hideWPMobileThemes($themes){
+    unset($themes['mobilissimo']);
+    return $themes;
+}
 
 # Load the WPMobile class
 require_once (WPMOB_DIR . '/core/class-wpmob.php');
