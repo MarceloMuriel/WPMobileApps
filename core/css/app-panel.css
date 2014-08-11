@@ -4,7 +4,7 @@
 }
 #bottomtoolbar {
 	height: 56px;
-	z-index: 10002;
+	z-index: 100001;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -42,7 +42,7 @@
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
 	font-size: 20px;
-	z-index: 10010;
+	z-index: 100002;
 	-moz-opacity: 0.20;
 	opacity: 0.20;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha" (Opacity=20);
@@ -153,7 +153,7 @@
 	padding-bottom: 60px;
 	left: 0px;
 	right: 0px;
-	z-index: 10000;
+	z-index: 100000;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
