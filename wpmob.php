@@ -31,6 +31,10 @@ define('WPMOB_THEME_URL', plugins_url('themes/mobilissimo', __FILE__));
 define('WPMOB_THEME_BASE_CLASS_PATH', WPMOB_DIR . '/core/theme/class-wpmob-theme.php');
 $GLOBALS['WPMOB_THEME_CLASS'] = 'WPMobilissimo';
 define('WPMOB_THEME_CLASS_PATH', WPMOB_DIR . '/core/theme/class-wpmob-mobilissimo.php');
+# Default theme settings
+define('WPMOB_DEFAULT_THEME_NAME', 'Mobilissimo');
+define('WPMOB_DEFAULT_THEME_TEMPLATE', 'mobilissimo');
+define('WPMOB_DEFAULT_THEME_CSS', 'mobilissimo');
 
 # Include the third-party embedded plugins.
 include_once ('plugins/third-party/device-theme-switcher/dts_controller.php');

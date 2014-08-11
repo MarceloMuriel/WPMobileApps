@@ -46,13 +46,32 @@ class WPMobile {
 		add_submenu_page('wpmobile', 'Apps Menu', 'Apps', 'manage_options', 'wpmobile-apps', array($this -> appHandler, 'admin_panel'));
 	}
 
+	function getDefaultSettings() {
+		# Default theme registration for the device-theme-switch plugin
+		$settings = array();
+		$settings['dts'] = array();
+		$settings['dts']['dts_handheld_theme'] = 'name=' . WPMOB_DEFAULT_THEME_NAME . '&template=' . WPMOB_DEFAULT_THEME_TEMPLATE . '&stylesheet=' . WPMOB_DEFAULT_THEME_CSS;
+		$settings['dts']['dts_tablet_theme'] = 'name=' . WPMOB_DEFAULT_THEME_NAME . '&template=' . WPMOB_DEFAULT_THEME_TEMPLATE . '&stylesheet=' . WPMOB_DEFAULT_THEME_CSS;
+		
+		return $settings;
+	}
+
 	function on_activation() {
 		if (!current_user_can('activate_plugins'))
 			return;
 		$plugin = isset($_REQUEST['plugin']) ? $_REQUEST['plugin'] : '';
 		# Check if the current request carries a valid nonce
 		check_admin_referer("activate-plugin_{$plugin}");
-
+		
+		# Register the default settings only the first time.
+		foreach ($this->getDefaultSettings() as $settings) {
+			foreach ($settings as $settingID => $setting) {
+				# If the setting does not exist, set it.
+				if(!get_option($settingID))
+					update_option($settingID, $setting);
+			}
+		}
+		# Let the appHandler manage the activation.
 		$this -> appHandler -> on_activation();
 	}
 
@@ -72,10 +91,12 @@ class WPMobile {
 			return;
 		# Check if the current request carries a valid nonce
 		check_admin_referer('bulk-plugins');
-		
+
 		# Delete all options and settings from the database
 		global $wpdb;
-		$wpdb->query("DELETE FROM wp_options WHERE option_name LIKE 'wpmob_%'");
+		$wpdb -> query("DELETE FROM wp_options WHERE option_name='dts_handheld_theme'");
+		$wpdb -> query("DELETE FROM wp_options WHERE option_name='dts_tablet_theme'");
+		$wpdb -> query("DELETE FROM wp_options WHERE option_name LIKE 'wpmob_%'");
 	}
 
 	function plugins_loaded() {

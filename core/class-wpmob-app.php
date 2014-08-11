@@ -119,6 +119,7 @@ class WPMobApp {
 
 	function getDefaultAppSettings() {
 		$settings = array();
+		# Default settings for the loaded apps.
 		foreach ($this->appClasses as $appClass) {
 			$settings = array_merge($settings, $appClass::getDefaultSettings());
 		}
