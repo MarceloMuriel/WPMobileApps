@@ -12,6 +12,21 @@ class WPMobAppContactUs {
 		wp_enqueue_style('wpmob-contact-us-css', WPMOB_URL . '/apps/contact-us/app.css', array(), '', 'all');
 	}
 
+	/**
+	 * Handle any request data passed to this application (e.g. e-mail sending)
+	 */
+	function handleRequest() {
+		if (array_key_exists('wpmobapp', $_REQUEST) && $_REQUEST['wpmobapp'] == 'WPMobAppContactUs') {
+			if (array_key_exists('action', $_REQUEST) && $_REQUEST['action'] == 'sendmail') {
+				# Send contact e-mail
+				include_once (WPMOB_DIR . '/apps/contact-us/send-email.php');
+				exit(1);
+			} else {
+				error_log('No valid action sent ' . $_REQUEST['action']);
+			}
+		}
+	}
+
 	static function getAdminOptions() {
 		$options = array();
 		$options[] = array("section" => "wpmob_apps", "type" => "heading", "title" => __("Contact us", "wpmob-contact-us"), "id" => "wpmob_contact_us");
@@ -47,10 +62,10 @@ class WPMobAppContactUs {
 		return $appSettings;
 	}
 
-	static function loadDomainText(){
+	static function loadDomainText() {
 		# Load Text Domain
 		load_plugin_textdomain('wpmob-contact-us', false, basename(WPMOB_DIR) . '/apps/' . basename(dirname(__FILE__)) . '/langs');
 	}
-	
+
 }
 ?>

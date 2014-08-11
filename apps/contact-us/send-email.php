@@ -2,9 +2,7 @@
 header('Content-Type: text/json');
 $output = array();
 
-if (!empty($_POST['contact_email']) && !empty($_POST['contact_subject']) && !empty($_POST['contact_message'])) {
-	# Load WordPress
-	require_once ('../../../../../wp-load.php');
+if (!empty($_POST) && !empty($_POST['contact_email']) && !empty($_POST['contact_subject']) && !empty($_POST['contact_message'])) {
 	# Get the e-mail address to send the message (from, to)
 	$to = get_option('wpmob_app_contact_us_address');
 	if ($to) {
@@ -32,7 +30,7 @@ if (!empty($_POST['contact_email']) && !empty($_POST['contact_subject']) && !emp
 		$output[] = array('type' => 'success', 'msg' => __('There is no recipient configured in the App.', 'wpmob-contact-us'));
 	}
 } else {
-	$output[] = array('type' => 'success', 'msg' => __('Sorry, there are missing parameters.', 'wpmob-contact-us'));
+	$output[] = array('type' => 'error', 'msg' => __('Sorry, there are missing parameters.', 'wpmob-contact-us'));
 }
 echo json_encode($output);
 ?>

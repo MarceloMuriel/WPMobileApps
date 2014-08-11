@@ -114,8 +114,24 @@ class WPMobile {
 		load_plugin_textdomain('wpmob', false, basename(WPMOB_DIR) . '/langs');
 		# Load Text Domain for each individual app
 		foreach ($this->appHandler->appClasses as $appClass) {
-			if(method_exists($appClass, 'loadDomainText'))
+			if (method_exists($appClass, 'loadDomainText'))
 				$appClass::loadDomainText();
+		}
+	}
+
+	/**
+	 * Treat any request directed to the plugin or to one of the Apps.
+	 */
+	function parseRequest($wp) {
+		# Handle any request for an App.
+		if (array_key_exists('wpmobapp', $_REQUEST)) {
+			if (in_array($_REQUEST['wpmobapp'], $this -> appHandler -> appClasses)) {
+				$app = new $_REQUEST['wpmobapp']();
+				if (method_exists($app, 'handleRequest'))
+					$app -> handleRequest();
+			} else {
+				error_log('Invalid class request ' . $_REQUEST['wpmobapp']);
+			}
 		}
 	}
 
