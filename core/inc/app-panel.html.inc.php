@@ -12,7 +12,7 @@ ksort($apps);
 		<div class="toolbar-carousel">
 			<?php foreach($apps as $app):?>
 			<div class="item wpmob-app-icon">
-				<a class="wpmob-icon" rel="<?php echo $app -> appID; ?>" href="<?php echo get_option($app -> appID . '_slug'); ?>"> <i class="<?php echo get_option($app -> appID . '_text_icon'); ?>"></i><span class="icontext"><?php echo get_option($app -> appID . '_label'); ?></span> </a>
+				<a class="wpmob-icon" rel="<?php echo $app -> appID; ?>" href="<?php echo get_option($app -> appID . '_slug'); ?>"> <i class="<?php echo get_option($app -> appID . '_text_icon'); ?>"></i><span class="icontext"><?php echo stripslashes(get_option($app -> appID . '_label')); ?></span> </a>
 			</div>
 			<?php endforeach; ?>
 		</div>
