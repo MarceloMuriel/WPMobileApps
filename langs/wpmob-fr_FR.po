@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpmobile 1.0\n"
 "Report-Msgid-Bugs-To: info@syscrunch.com\n"
-"POT-Creation-Date: 2014-08-11 15:46+0200\n"
-"PO-Revision-Date: 2014-08-11 15:39+0100\n"
+"POT-Creation-Date: 2014-08-12 11:52+0200\n"
+"PO-Revision-Date: 2014-08-12 11:54+0100\n"
 "Last-Translator: SysCrunch <info@syscrunch.com>\n"
 "Language-Team: SysCrunch <info@syscrunch.com>\n"
 "Language: fr_FR\n"
@@ -20,29 +20,45 @@ msgstr ""
 msgid "Save changes"
 msgstr "Enregistrer modifications"
 
-#: core/class-wpmob-app.php:106
+#: core/class-wpmob-app.php:110
 msgid "General Settings"
 msgstr "Options Générales"
 
 #. General section
-#: core/class-wpmob-app.php:108
+#: core/class-wpmob-app.php:112
 msgid "General"
 msgstr "Général"
 
-#: core/class-wpmob-app.php:109
+#: core/class-wpmob-app.php:113
 msgid "Disable All Apps"
 msgstr "Désactiver tous les Apps"
 
-#: core/class-wpmob-app.php:109
+#: core/class-wpmob-app.php:113
 msgid "Disable"
 msgstr "Désactiver"
 
-#: core/class-wpmob-app.php:109
+#: core/class-wpmob-app.php:113
 msgid "Checking this option will not show any apps in your theme."
-msgstr "En cochante cette case, les Apps ne s'afficheront pas sur votre site."
+msgstr "En cochant cette case, les Apps ne s'afficheront pas sur votre site."
+
+#: core/class-wpmob-app.php:114
+msgid "Enable Apps also in Desktop "
+msgstr "Activer les Apps aussi en Desktop"
+
+#: core/class-wpmob-app.php:114
+msgid "Enable"
+msgstr "Activer"
+
+#: core/class-wpmob-app.php:114
+msgid ""
+"Checking this option will load the apps in Desktop mode besides tablet and "
+"smartphones."
+msgstr ""
+"En cochant cette case, les Apps s'afficheront aussi en mode Desktop à part "
+"le mode tablette et smartphone."
 
 #. App main section
-#: core/class-wpmob-app.php:111
+#: core/class-wpmob-app.php:116
 msgid "App Settings"
 msgstr "Options d'Apps"
 

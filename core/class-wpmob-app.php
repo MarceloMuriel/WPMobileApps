@@ -53,11 +53,14 @@ class WPMobApp {
 		# Do not load this scripts in the administration panel.
 		$appsDisabled = get_option('wpmob_disable_apps') == 'true';
 		if (!is_admin() && !$appsDisabled) {
-			wp_enqueue_script('carousel-js', WPMOB_URL . '/core/js/owl.carousel.min.js', array('jquery'), '', true);
-			wp_enqueue_script('wpmob-panel-js', WPMOB_URL . '/core/js/app-panel.js', array('jquery', 'carousel-js'), '', true);
-			wp_enqueue_style('carousel-css', WPMOB_URL . '/core/css/owl.carousel.css', array(), '', 'all');
-			wp_enqueue_style('font-awesome-css', WPMOB_URL . '/core/css/font-awesome.min.css', array(), '', 'all');
-			wp_enqueue_style('wpmob-panel-css', WPMOB_URL . '/core/css/app-panel.css', array(), '', 'all');
+			$desktopEnabled = get_option('wpmob_enable_apps_desktop') == 'true';
+			if ($desktopEnabled || detect_users_device() != 'desktop' || (isset($_GET['theme']) && $_GET['theme'] != 'active')) {
+				wp_enqueue_script('carousel-js', WPMOB_URL . '/core/js/owl.carousel.min.js', array('jquery'), '', true);
+				wp_enqueue_script('wpmob-panel-js', WPMOB_URL . '/core/js/app-panel.js', array('jquery', 'carousel-js'), '', true);
+				wp_enqueue_style('carousel-css', WPMOB_URL . '/core/css/owl.carousel.css', array(), '', 'all');
+				wp_enqueue_style('font-awesome-css', WPMOB_URL . '/core/css/font-awesome.min.css', array(), '', 'all');
+				wp_enqueue_style('wpmob-panel-css', WPMOB_URL . '/core/css/app-panel.css', array(), '', 'all');
+			}
 		}
 	}
 
@@ -65,10 +68,11 @@ class WPMobApp {
 	 * It loads the UI in the frontend.
 	 */
 	function load_frontend_ui() {
-		# Do not load this content in the administration panel or in desktop mode.
-		if ((!is_admin() && detect_users_device() != 'desktop') || (isset($_GET['theme']) && $_GET['theme'] != 'desktop')) {
-			$appsDisabled = get_option('wpmob_disable_apps') == 'true';
-			if (!$appsDisabled) {
+		# Do not load this content in the administration panel or in desktop mode if it is not enabled.
+		$appsDisabled = get_option('wpmob_disable_apps') == 'true';
+		if (!is_admin() && !$appsDisabled) {
+			$desktopEnabled = get_option('wpmob_enable_apps_desktop') == 'true';
+			if ($desktopEnabled || detect_users_device() != 'desktop' || (isset($_GET['theme']) && $_GET['theme'] != 'active')) {
 				require_once (WPMOB_DIR . '/core/css/app-panel-fonts.css.php');
 				require_once (WPMOB_DIR . '/core/inc/app-panel.html.inc.php');
 			}
@@ -107,6 +111,7 @@ class WPMobApp {
 		# General section
 		$options[] = array("section" => "wpmob_general", "type" => "heading", "title" => __("General", "wpmob"), "id" => "wpmob_general_visual");
 		$options[] = array("under_section" => "wpmob_general_visual", "type" => "checkbox", "name" => __("Disable All Apps", "wpmob"), "id" => array("wpmob_disable_apps"), "options" => array(__("Disable", "wpmob")), "desc" => __("Checking this option will not show any apps in your theme.", "wpmob"), "default" => array("not"));
+		$options[] = array("under_section" => "wpmob_general_visual", "type" => "checkbox", "name" => __("Enable Apps also in Desktop ", "wpmob"), "id" => array("wpmob_enable_apps_desktop"), "options" => array(__("Enable", "wpmob")), "desc" => __("Checking this option will load the apps in Desktop mode besides tablet and smartphones.", "wpmob"), "default" => array("not"));
 		# App main section
 		$options[] = array("type" => "section", "icon" => "dashicons-admin-tools", "title" => __("App Settings", "wpmob"), "id" => "wpmob_apps", "expanded" => "true");
 
