@@ -60,6 +60,7 @@ class WPMobApp {
 				wp_enqueue_style('carousel-css', WPMOB_URL . '/core/css/owl.carousel.css', array(), '', 'all');
 				wp_enqueue_style('font-awesome-css', WPMOB_URL . '/core/css/font-awesome.min.css', array(), '', 'all');
 				wp_enqueue_style('wpmob-panel-css', WPMOB_URL . '/core/css/app-panel.css', array(), '', 'all');
+				wp_enqueue_style('wpmob-panel-custom-css', WPMOB_URL . '/core/css/app-panel-custom.css', array(), '', 'all');
 			}
 		}
 	}
