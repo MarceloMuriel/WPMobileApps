@@ -41,15 +41,15 @@ also for Desktop.
 
 ** IMPORTANT **
 
-To test the Apps and the mobile theme in a desktop browser (e.g. Chrome), you can add ?theme=tablet or ?theme=handheld 
-to the URL. For example, if you are running your site on localhost, it would be http://localhost/?theme=tablet. 
-To switch back to your current theme, reset it by using ?theme=active. Otherwise, you will keep on seing 
-the mobile version until you clean your history (cookies).
+To test the Apps and the mobile theme in a desktop browser (e.g. Chrome), you can append ?theme=tablet or 
+?theme=handheld to the URL of your site. For example, if you are running your site on localhost, it would 
+be http://localhost/?theme=tablet. To switch back to your current theme, reset it by using ?theme=active to 
+clean the cookie. 
 
 == Frequently Asked Questions ==
 = How to test the plugin in a browser like Chrome? =
 You can append ?theme=tablet or ?theme=handheld to the URL of your site, for example http://localhost/?theme=tablet. 
-This will display the mobile version (setting a cookie). ATTENTION: you will need to put ?theme=active to 
+This will display the mobile version (setting a cookie). You will need to put ?theme=active to 
 switch back to your current theme or simply delete your cookies.
 = How to disable the mobile theme? =
 In the Theme Activation submenu of the plugin, choose the theme you want to use for mobile devices (i.e. tablet, smartphone). 
