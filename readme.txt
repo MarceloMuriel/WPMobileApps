@@ -31,20 +31,20 @@ The Apps can also be used in Desktop mode (e.g. laptops, PCs), there is an optio
 you only want the mobile theme, it is also possible to disable the Apps.
 
 == Installation ==
-1. Download the plugin, unzip its content and place the `WPMobileApps` directory inside your  
-`/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in the the WordPress administration.
-3. Choose the theme to use for mobile devices (tablet, handheld) in the 'Theme Activation' submenu of the 
+1. Download the plugin, unzip its content and place the WPMobileApps directory inside your  
+/wp-content/plugins/ directory.
+1. Activate the plugin through the 'Plugins' menu in the the WordPress administration.
+1. Choose the theme to use for mobile devices (tablet, handheld) in the 'Theme Activation' submenu of the 
 plugin (below Settings). 
-4. Configure the Apps individually. You can as well disable all of them or enable them 
+1. Configure the Apps individually. You can as well disable all of them or enable them 
 also for Desktop.
 
 ** IMPORTANT **
 
-To test the Apps and the mobile theme in a normal browser (e.g. Chrome), you can add ?theme=tablet or ?theme=handheld 
+To test the Apps and the mobile theme in a desktop browser (e.g. Chrome), you can add ?theme=tablet or ?theme=handheld 
 to the URL. For example, if you are running your site on localhost, it would be http://localhost/?theme=tablet. 
-To switch back to your current theme, reset it by using ?theme=active. Otherwise you will keep on seing 
-the mobile version until you clean your history 
+To switch back to your current theme, reset it by using ?theme=active. Otherwise, you will keep on seing 
+the mobile version until you clean your history (cookies).
 
 == Frequently Asked Questions ==
 = How to test the plugin in a browser like Chrome? =
@@ -83,7 +83,7 @@ just an example, in your case it would be your current theme.
 updated. You can use mqTranslate instead which is a fork of that plugin compatible up to WordPress 3.9.2.
 * WPMobile Apps support localization. By default, it will set the default settings in your WordPress local 
 (e.g. en_US). If you use a multi-lingual site with a plugin (such as mqTranslate) you have to enter 
-the corresponding text in the App settings. For example, for a multi-lingual label for the Contact us app 
+the corresponding text in the App settings. For example, for a multi-lingual label for the Contact us app, 
 it would be: <!--:en-->Contact us<!--:--><!--:fr-->Contactez-nous<!--:-->. Your plugin will display the 
 correct language on your website.
 
