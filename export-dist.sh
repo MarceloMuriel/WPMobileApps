@@ -13,7 +13,8 @@ cd $wpmob_theme_dir
 mkdir -p $dist_theme_dir
 git archive master | tar -x -C $dist_theme_dir
 cd $dist_dir
+find . -iname '.gitignore' -exec rm {} \;
 rm export-dist.sh
 rm create-po.sh
 cd ..
-tar -czf WPMobileApps.tar.gz WPMobileApps
+zip -qr WPMobileApps.zip WPMobileApps

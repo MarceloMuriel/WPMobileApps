@@ -63,7 +63,8 @@ Check the enable Apps in desktop option in the Apps configuration panel.
 There is a file for this /core/css/app-panel-custom.css. Apply your custom styles there. For example 
 to change the toolbar height: #bottomtoolbar{height: 100px;} Please not that this file is loaded after 
 the plugin styles, thus it should override existing styles. 
-
+= Does the plugin delete all its data on uninstall? =
+The plugin removes all its data in the wp_options table that start with the wpmob_ prefix. 
 
 == Screenshots ==
 1. Apps and Mobilissimo (mobile theme) in mobile view. This is how your site would look just after the 
