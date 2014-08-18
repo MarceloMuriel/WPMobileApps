@@ -1,7 +1,8 @@
 <?php
-require_once (WPMOB_DIR . '/core/util/device-detection.php');
+require_once (WPMOB_DIR . '/core/class-wpmob-theme-switcher.php');
+require_once (WPMOB_DIR . '/core/class-wpmob-extension.php');
 
-class WPMobApp {
+class WPMobApp extends WPMobExtension{
 	var $appClasses = array();
 
 	function __construct() {
@@ -54,7 +55,7 @@ class WPMobApp {
 		$appsDisabled = get_option('wpmob_disable_apps') == 'true';
 		if (!is_admin() && !$appsDisabled) {
 			$desktopEnabled = get_option('wpmob_enable_apps_desktop') == 'true';
-			if ($desktopEnabled || detect_users_device() != 'desktop' || (isset($_GET['theme']) && $_GET['theme'] != 'active')) {
+			if ($desktopEnabled || WPMobSwitcher::detect_users_device() != 'desktop' || (isset($_GET['theme']) && $_GET['theme'] != 'active')) {
 				wp_enqueue_script('carousel-js', WPMOB_URL . '/core/js/owl.carousel.min.js', array('jquery'), '', true);
 				wp_enqueue_script('wpmob-panel-js', WPMOB_URL . '/core/js/app-panel.js', array('jquery', 'carousel-js'), '', true);
 				wp_enqueue_style('carousel-css', WPMOB_URL . '/core/css/owl.carousel.css', array(), '', 'all');
@@ -73,7 +74,7 @@ class WPMobApp {
 		$appsDisabled = get_option('wpmob_disable_apps') == 'true';
 		if (!is_admin() && !$appsDisabled) {
 			$desktopEnabled = get_option('wpmob_enable_apps_desktop') == 'true';
-			if ($desktopEnabled || detect_users_device() != 'desktop' || (isset($_GET['theme']) && $_GET['theme'] != 'active')) {
+			if ($desktopEnabled || WPMobSwitcher::detect_users_device() != 'desktop' || (isset($_GET['theme']) && $_GET['theme'] != 'active')) {
 				require_once (WPMOB_DIR . '/core/css/app-panel-fonts.css.php');
 				require_once (WPMOB_DIR . '/core/inc/app-panel.html.inc.php');
 			}
@@ -123,7 +124,7 @@ class WPMobApp {
 		return $options;
 	}
 
-	function getDefaultAppSettings() {
+	function getDefaultSettings() {
 		$settings = array();
 		# Default settings for the loaded apps.
 		foreach ($this->appClasses as $appClass) {
@@ -135,17 +136,13 @@ class WPMobApp {
 
 	function on_activation() {
 		# Register the default settings for each app only the first time.
-		foreach ($this->getDefaultAppSettings() as $appID => $settings) {
+		foreach ($this->getDefaultSettings() as $appID => $settings) {
 			foreach ($settings as $settingID => $setting) {
 				# If the setting does not exist, set it.
 				if (!get_option($settingID))
 					update_option($settingID, $setting);
 			}
 		}
-	}
-
-	function on_deactivation() {
-		# Temporarily deactivate the apps
 	}
 
 }
