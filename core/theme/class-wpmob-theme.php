@@ -15,7 +15,7 @@ abstract class WPMobTheme {
 	
 	static function invalid_theme_path(){?>
 		<div class="error">
-			<p><?php echo __('The selected theme does not exist at ') . WPMOB_THEME_PATH; ?></p>
+			<p><?php echo __('The selected theme does not exist at ', 'wpmob') . WPMOB_THEME_PATH; ?></p>
 		</div>
     <?php
 	}
