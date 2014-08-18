@@ -36,17 +36,29 @@ define('WPMOB_DEFAULT_THEME_NAME', 'Mobilissimo');
 define('WPMOB_DEFAULT_THEME_TEMPLATE', 'mobilissimo');
 define('WPMOB_DEFAULT_THEME_CSS', 'mobilissimo');
 
-# Include the third-party embedded plugins.
-include_once ('plugins/third-party/device-theme-switcher/dts_controller.php');
 
 # Register the embedded themes.
 register_theme_directory(WPMOB_DIR . '/themes');
 # Hide WPMobile themes from the themes.php page since they are not standalone themes.
 add_filter('wp_prepare_themes_for_js', 'hideWPMobileThemes');
-function hideWPMobileThemes($themes){
-    unset($themes['mobilissimo']);
-    return $themes;
+function hideWPMobileThemes($themes) {
+	unset($themes['mobilissimo']);
+	return $themes;
 }
+
+
+# Load the theme redirection functionality
+require_once (WPMOB_DIR . '/core/class-wpmob-theme-switcher.php');
+require_once (WPMOB_DIR . '/core/class-wpmob-theme-switch-manager.php');
+$wpmobSwitcher = new WPMobSwitcher();
+# Template hook.
+add_filter('template', array($wpmobSwitcher, 'deliver_template'), 10, 0);
+# Stylesheet hook.
+add_filter('stylesheet', array($wpmobSwitcher, 'deliver_stylesheet'), 10, 0);
+# Hook the save action to the load-{parent_page_slug}_page_{plugin_subpage_slug} action.
+# It will save the settings once the subpage is loaded.
+add_action('load-wpmobile-apps_page_wpmobile-redir', array('WPMobThemeSwitchManager', 'save'));
+
 
 # Load the WPMobile class
 require_once (WPMOB_DIR . '/core/class-wpmob.php');
@@ -60,9 +72,8 @@ register_uninstall_hook(__FILE__, array('WPMobile', 'on_uninstall'));
 add_action('plugins_loaded', array($wpmob, 'plugins_loaded'));
 # Add custom action buttons in the plugin list
 add_filter('plugin_action_links', array($wpmob, 'addCustomActionLinks'), 10, 2);
-# Parse requests 
+# Parse requests
 add_action('wp', array($wpmob, 'parseRequest'), 10, 1);
-
 # Initialize immediately the plugin
 $wpmob -> initialize();
 ?>
