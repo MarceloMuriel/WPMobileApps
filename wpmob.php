@@ -12,6 +12,11 @@
  Trademark:
  */
 
+# This plugin cannot be called directly.
+if (!defined('WPINC')) {
+	die ;
+}
+
 ini_set('display_errors', 0);
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
@@ -36,7 +41,6 @@ define('WPMOB_DEFAULT_THEME_NAME', 'Mobilissimo');
 define('WPMOB_DEFAULT_THEME_TEMPLATE', 'mobilissimo');
 define('WPMOB_DEFAULT_THEME_CSS', 'mobilissimo');
 
-
 # Register the embedded themes.
 register_theme_directory(WPMOB_DIR . '/themes');
 # Hide WPMobile themes from the themes.php page since they are not standalone themes.
@@ -45,7 +49,6 @@ function hideWPMobileThemes($themes) {
 	unset($themes['mobilissimo']);
 	return $themes;
 }
-
 
 # Load the theme redirection functionality
 require_once (WPMOB_DIR . '/core/class-wpmob-theme-switcher.php');
@@ -58,7 +61,6 @@ add_filter('stylesheet', array($wpmobSwitcher, 'deliver_stylesheet'), 10, 0);
 # Hook the save action to the load-{parent_page_slug}_page_{plugin_subpage_slug} action.
 # It will save the settings once the subpage is loaded.
 add_action('load-wpmobile-apps_page_wpmobile-redir', array('WPMobThemeSwitchManager', 'save'));
-
 
 # Load the WPMobile class
 require_once (WPMOB_DIR . '/core/class-wpmob.php');
